@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Girişi — Fensefe Okulu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0a0e1a; --navy-mid: #111827; --navy-light: #1a2340;
+      --purple: #6c3de0; --purple-mid: #8b5cf6; --purple-light: #a78bfa;
+      --gold: #f4b942; --teal: #06b6d4; --teal-light: #22d3ee;
+      --white: #fff; --gray-100: #e8eaf6; --gray-300: #94a3b8; --gray-500: #475569;
+      --gradient-brand: linear-gradient(135deg, #6c3de0 0%, #06b6d4 100%);
+      --font: 'Outfit', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font);
+      background: var(--navy);
+      color: var(--white);
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .login-wrap {
+      width: 100%; max-width: 420px;
+      padding: 1rem;
+    }
+    .login-logo {
+      text-align: center; margin-bottom: 2rem;
+    }
+    .login-logo .icon { font-size: 3rem; display: block; margin-bottom: .5rem; }
+    .login-logo h1 { font-size: 1.8rem; font-weight: 800; }
+    .login-logo h1 span:first-child { color: #22d3ee; }
+    .login-logo h1 span:last-child  { color: #a78bfa; }
+    .login-logo p { font-size: .85rem; color: var(--gray-300); margin-top: .25rem; }
+
+    .login-card {
+      background: var(--navy-light);
+      border: 1px solid rgba(108,61,224,.3);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 24px 64px rgba(0,0,0,.5);
+    }
+    .login-card h2 { font-size: 1.2rem; font-weight: 700; margin-bottom: 1.75rem; }
+    .form-group { margin-bottom: 1.25rem; }
+    label { display: block; font-size: .82rem; font-weight: 600; color: var(--gray-300); margin-bottom: .4rem; letter-spacing: .04em; }
+    input {
+      width: 100%; padding: .8em 1em;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(108,61,224,.25);
+      border-radius: 10px;
+      font-family: var(--font); font-size: .95rem; color: var(--white);
+      outline: none; transition: .2s;
+    }
+    input:focus { border-color: var(--purple-mid); background: rgba(108,61,224,.1); box-shadow: 0 0 0 3px rgba(108,61,224,.2); }
+    input::placeholder { color: var(--gray-500); }
+    .btn-login {
+      width: 100%; padding: .85em;
+      background: var(--gradient-brand); color: var(--white);
+      border: none; border-radius: 100px;
+      font-family: var(--font); font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: .2s; margin-top: .5rem;
+    }
+    .btn-login:hover { filter: brightness(1.1); transform: translateY(-2px); }
+    .error-msg {
+      background: rgba(237,73,86,.15); border: 1px solid rgba(237,73,86,.4);
+      color: #ff8a8a; border-radius: 8px; padding: .75rem 1rem;
+      font-size: .85rem; margin-bottom: 1rem; display: none;
+    }
+    .hint {
+      margin-top: 1.5rem; padding: 1rem;
+      background: rgba(244,185,66,.07); border: 1px solid rgba(244,185,66,.2);
+      border-radius: 10px; font-size: .8rem; color: var(--gold); line-height: 1.6;
+    }
+    .hint strong { display: block; margin-bottom: .3rem; }
+    .back-link { display: block; text-align: center; margin-top: 1.5rem; font-size: .85rem; color: var(--gray-300); }
+    .back-link a { color: var(--purple-light); text-decoration: none; }
+    .back-link a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="login-wrap">
+    <div class="login-logo">
+      <span class="icon">⚛</span>
+      <h1><span>Fen</span><span>sefe</span></h1>
+      <p>Yönetim Paneli</p>
+    </div>
+
+    <div class="login-card">
+      <h2>🔐 Admin Girişi</h2>
+
+      <div class="error-msg" id="error-msg">
+        ❌ Kullanıcı adı veya şifre hatalı!
+      </div>
+
+      <form id="login-form" onsubmit="doLogin(event)">
+        <div class="form-group">
+          <label for="username">Kullanıcı Adı</label>
+          <input type="text" id="username" placeholder="admin" required autocomplete="username" />
+        </div>
+        <div class="form-group">
+          <label for="password">Şifre</label>
+          <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password" />
+        </div>
+        <button class="btn-login" type="submit">Giriş Yap →</button>
+      </form>
+
+      <div class="hint">
+        <strong>💡 Varsayılan Giriş Bilgileri:</strong>
+        Kullanıcı adı: <strong>admin</strong><br/>
+        Şifre: <strong>fensefe2025</strong><br/><br/>
+        ⚠️ Siteyi yayınlamadan önce şifrenizi değiştirin!<br/>
+        (Admin Paneli → Ayarlar → Şifre Değiştir)
+      </div>
+    </div>
+
+    <p class="back-link">← <a href="index.html">Ana sayfaya dön</a></p>
+  </div>
+
+  <script>
+    // Zaten giriş yapıldıysa direkt panele yönlendir
+    if (sessionStorage.getItem('fo_admin_logged') === 'true') {
+      window.location.href = 'admin-panel.html';
+    }
+
+    function doLogin(e) {
+      e.preventDefault();
+      const user = document.getElementById('username').value.trim();
+      const pass = document.getElementById('password').value;
+
+      // Şifre ayarlardan okunur (localStorage'da saklanır)
+      const savedUser = localStorage.getItem('fo_admin_user') || 'admin';
+      const savedPass = localStorage.getItem('fo_admin_pass') || 'fensefe2025';
+
+      if (user === savedUser && pass === savedPass) {
+        sessionStorage.setItem('fo_admin_logged', 'true');
+        window.location.href = 'admin-panel.html';
+      } else {
+        document.getElementById('error-msg').style.display = 'block';
+        document.getElementById('password').value = '';
+      }
+    }
+  </script>
+</body>
+</html>

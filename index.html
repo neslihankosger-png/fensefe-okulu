@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fensefe Okulu | Fen & Felsefe ile Düşünen Nesiller</title>
+  <meta name="description" content="Fensefe Okulu — Uzm. Öğr. Neslihan Köşger ile fen bilimleri ve felsefi düşünceyi bir araya getiren yenilikçi eğitim platformu. LGS hazırlık, P4C yaklaşımı ve yeni nesil öğrenme." />
+  <meta name="keywords" content="fensefe okulu, fen bilimleri, felsefe eğitimi, LGS hazırlık, P4C, Neslihan Köşger, yeni nesil eğitim" />
+  <meta property="og:title" content="Fensefe Okulu | Fen & Felsefe ile Düşünen Nesiller" />
+  <meta property="og:description" content="Fen bilimleri ve felsefi düşünceyi bir araya getiren yenilikçi eğitim platformu." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://fensefeokulu.netlify.app/" />
+  <meta property="og:image" content="https://fensefeokulu.netlify.app/hero.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Fensefe Okulu | Fen & Felsefe ile Düşünen Nesiller" />
+  <meta name="twitter:description" content="Fen bilimleri ve felsefi düşünceyi bir araya getiren yenilikçi eğitim platformu." />
+  <meta name="twitter:image" content="https://fensefeokulu.netlify.app/hero.png" />
+  <link rel="canonical" href="https://fensefeokulu.netlify.app/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Crimson+Pro:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="bg-particles" aria-hidden="true"></canvas>
+
+  <!-- ─── NAVBAR ─── -->
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Ana menü">
+    <div class="nav-container">
+      <a class="nav-logo" href="#anasayfa" aria-label="Fensefe Okulu Ana Sayfa">
+        <span class="logo-icon" aria-hidden="true">⚛</span>
+        <span class="logo-text">
+          <span class="logo-fen">Fen</span><span class="logo-sefe">sefe</span>
+          <small>Okulu</small>
+        </span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="#hakkimda" class="nav-link">Hakkımda</a></li>
+        <li><a href="#yaklasim" class="nav-link">Yaklaşımım</a></li>
+        <li><a href="#galeri" class="nav-link">Galeri</a></li>
+        <li><a href="#dersler" class="nav-link">Dersler</a></li>
+        <li><a href="#icerikler" class="nav-link">İçerikler</a></li>
+        <li><a href="#iletisim" class="nav-link nav-cta" id="nav-iletisim-btn">İletişim</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle-btn" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="mobile-menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" role="menu" aria-hidden="true">
+      <a href="#hakkimda" class="mobile-link" role="menuitem">Hakkımda</a>
+      <a href="#yaklasim" class="mobile-link" role="menuitem">Yaklaşımım</a>
+      <a href="#galeri" class="mobile-link" role="menuitem">Galeri</a>
+      <a href="#dersler" class="mobile-link" role="menuitem">Dersler</a>
+      <a href="#icerikler" class="mobile-link" role="menuitem">İçerikler</a>
+      <a href="#iletisim" class="mobile-link" role="menuitem">İletişim</a>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <section class="hero" id="anasayfa" aria-labelledby="hero-heading">
+    <div class="hero-bg-img" aria-hidden="true">
+      <img src="hero.png" alt="" role="presentation" />
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-particles" aria-hidden="true">
+      <span class="particle p1">⚛</span>
+      <span class="particle p2">∑</span>
+      <span class="particle p3">φ</span>
+      <span class="particle p4">π</span>
+      <span class="particle p5">∞</span>
+      <span class="particle p6">🔬</span>
+      <span class="particle p7">💡</span>
+      <span class="particle p8">✦</span>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge" aria-label="Yeni Nesil Eğitim">
+        <span class="badge-dot" aria-hidden="true"></span>
+        <span id="dom-hero-badge">Yeni Nesil Eğitim Platformu</span>
+      </div>
+      <h1 id="hero-heading" class="hero-title">
+        <span class="hero-title-fen" id="dom-hero-left">FEN</span>
+        <span class="hero-title-plus" aria-hidden="true">+</span>
+        <span class="hero-title-sefe" id="dom-hero-right">FELSE<span class="hero-title-accent">FE</span></span>
+        <br />
+        <span class="hero-title-sub">= <em id="dom-hero-combined">FENSEFE</em></span>
+      </h1>
+      <p class="hero-desc" id="dom-hero-desc">
+        Bilimi sorgulayan, felsefeyi seven, düşünen bireyler yetiştiriyoruz.<br />
+        <strong>Uzm. Öğr. Neslihan Köşger</strong> ile eğitime yeni bir soluk katın.
+      </p>
+      <div class="hero-actions">
+        <a href="#dersler" class="btn btn-primary" id="hero-dersler-btn">Dersleri Keşfet</a>
+        <a href="#hakkimda" class="btn btn-ghost" id="hero-hakkimda-btn">Daha Fazla Öğren</a>
+      </div>
+      <div class="hero-stats" role="list" aria-label="İstatistikler">
+        <div class="stat-item" role="listitem">
+          <strong class="stat-num" id="dom-stat-followers" data-target="2338">0</strong>
+          <span class="stat-label">Takipçi</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item" role="listitem">
+          <strong class="stat-num" id="dom-stat-posts" data-target="41">0</strong>
+          <span class="stat-label">İçerik</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item" role="listitem">
+          <strong class="stat-num" data-target="100">0</strong>
+          <span class="stat-label">% Kalite</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span>Aşağı Kaydır</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ─── HAKKIMDA ─── -->
+  <section class="about" id="hakkimda" aria-labelledby="about-heading">
+    <div class="section-container">
+      <div class="about-content">
+        <div class="about-image-wrap reveal-fade-left">
+          <div class="about-image-frame" aria-hidden="true">
+            <div class="about-avatar">
+              <img src="logo-portrait.jpg" alt="Neslihan Köşger" class="about-avatar-img" />
+              <div class="avatar-ring ring1" aria-hidden="true"></div>
+              <div class="avatar-ring ring2" aria-hidden="true"></div>
+            </div>
+            <div class="about-badge-float ab1" aria-hidden="true">
+              <span>🔬</span> Fen Bilimleri
+            </div>
+            <div class="about-badge-float ab2" aria-hidden="true">
+              <span>🦉</span> P4C
+            </div>
+            <div class="about-badge-float ab3" aria-hidden="true">
+              <span>📚</span> LGS
+            </div>
+          </div>
+        </div>
+        <div class="about-text reveal-fade-right">
+          <span class="section-tag">Benim Hakkımda</span>
+          <h2 id="about-heading" class="section-title"><span id="dom-about-title">Uzm. Öğr.</span><br /><span class="gradient-text" id="dom-about-name">Neslihan Köşger</span></h2>
+          <p class="about-lead" id="dom-about-quote">
+            "Fen bilimleri ve felsefeyi birleştirerek öğrencilerimi hem bilim insanı hem de sorgulayan birey olarak yetiştirmeyi hedefliyorum."
+          </p>
+          <p class="about-body" id="dom-about-p1">
+            Yıllardır sürdürdüğüm eğitim yolculuğumda, fen bilimlerini ezberden değil
+            <em>anlayarak</em> öğretmenin peşindeyim. Bunun için felsefi düşünce yöntemlerini
+            derslerime entegre ettim. Bu sentezi <strong>Fensefe Okulu</strong> adıyla
+            bir platforma taşıdım.
+          </p>
+          <p class="about-body" id="dom-about-p2">
+            P4C (Philosophy for Children / Çocuklarla Felsefe) yaklaşımını temel alarak
+            öğrencilerimin merak etmesini, sorgulamasını ve keşfetmesini sağlıyorum.
+            Çünkü düşünen bir öğrenci, her sınavı aşabilir.
+          </p>
+          <div class="about-tags" role="list" aria-label="Uzmanlık alanları">
+            <span class="tag" role="listitem">Uzman Öğretmen</span>
+            <span class="tag" role="listitem">P4C Uygulayıcısı</span>
+            <span class="tag" role="listitem">LGS Hazırlık</span>
+            <span class="tag" role="listitem">Fen Bilimleri</span>
+            <span class="tag" role="listitem">Felsefi Düşünce</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── EĞİTİM SÜTUNLARI ─── -->
+  <section class="pillars-section" id="sutunlar" aria-labelledby="pillars-heading">
+    <div class="glowing-orbs-container" aria-hidden="true">
+      <div class="glowing-orb orb-purple"></div>
+      <div class="glowing-orb orb-teal"></div>
+    </div>
+    <div class="section-container" style="position: relative; z-index: 1;">
+      <div class="section-header text-center">
+        <span class="section-tag">Odak Alanlarımız</span>
+        <h2 id="pillars-heading" class="section-title">Eğitimimizin <span class="gradient-text">Temel Sütunları</span></h2>
+        <p class="section-sub">Fen ve felsefenin kesişiminde, yeni nesil öğrenme araçlarıyla yapılandırılmış özgün müfredatımız (Detaylar için üzerine gelin)</p>
+      </div>
+      <div class="pillars-grid" role="list">
+        <div class="pillar-badge reveal-scale-up" role="listitem">
+          <div class="pillar-icon-wrap" aria-hidden="true">🔬</div>
+          <h3 class="pillar-title">Fen Dersi</h3>
+          <p class="pillar-desc">Ezberci kalıplardan uzak, tamamen deney, gözlem ve sorgulamaya dayalı modern fen bilimleri eğitimi.</p>
+        </div>
+        <div class="pillar-badge reveal-scale-up delay-100" role="listitem">
+          <div class="pillar-icon-wrap" aria-hidden="true">🦉</div>
+          <h3 class="pillar-title">Felsefe (P4C)</h3>
+          <p class="pillar-desc">Çocuklar için felsefe yaklaşımıyla düşünmeyi, soru sormayı ve eleştirel analiz yapmayı öğrenme.</p>
+        </div>
+        <div class="pillar-badge reveal-scale-up delay-200" role="listitem">
+          <div class="pillar-icon-wrap" aria-hidden="true">💻</div>
+          <h3 class="pillar-title">Web 2.0 Araçları</h3>
+          <p class="pillar-desc">Dersleri dijital oyunlar, interaktif kavram haritaları ve yeni nesil eğitim teknolojileriyle eğlenceli kılma.</p>
+        </div>
+        <div class="pillar-badge reveal-scale-up delay-300" role="listitem">
+          <div class="pillar-icon-wrap" aria-hidden="true">📐</div>
+          <h3 class="pillar-title">LGS Dersleri</h3>
+          <p class="pillar-desc">Mantık muhakeme yeteneğini geliştiren, yeni nesil LGS fen sorularını çözmeye yönelik kapsamlı stratejiler.</p>
+        </div>
+        <div class="pillar-badge reveal-scale-up delay-400" role="listitem">
+          <div class="pillar-icon-wrap" aria-hidden="true">📋</div>
+          <h3 class="pillar-title">MEB Müfredatı</h3>
+          <p class="pillar-desc">Milli Eğitim Bakanlığı'nın en güncel ders kazanımları ile tam uyumlu, eksiksiz konu anlatım ve pratikleri.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SIMULASYON LAB ─── -->
+  <section class="simulation-section" id="simulasyon-lab" aria-labelledby="sim-heading">
+    <div class="glowing-orbs-container" aria-hidden="true">
+      <div class="glowing-orb orb-teal" style="top: 20%; left: 10%;"></div>
+      <div class="glowing-orb orb-purple" style="bottom: 10%; right: 10%;"></div>
+    </div>
+    <div class="section-container" style="position: relative; z-index: 1;">
+      <div class="section-header text-center">
+        <span class="section-tag" style="border-color: rgba(6,182,212,.4); background: rgba(6,182,212,.08); color: var(--teal-light);">İnteraktif Deney Atölyesi</span>
+        <h2 id="sim-heading" class="section-title">Öğrenmeye <span class="gradient-text">Hazır Mısın?</span></h2>
+        <p class="section-sub">Bilim ezberlemek için değil, sorgulamak içindir! Canlı pH simülatörümüzle çözeltinin asitliğini değiştirin ve moleküllerin hareketini gözlemleyin.</p>
+      </div>
+
+      <div class="sim-grid">
+        <!-- Beaker Titration Column -->
+        <div class="sim-beaker-panel glass-panel reveal-scale-up">
+          <div class="beaker-drop-zone">
+            <!-- Simulated Dropper -->
+            <div class="dropper" id="dropper-el" aria-hidden="true">
+              <div class="dropper-bulb"></div>
+              <div class="dropper-stem"></div>
+              <div class="dropper-drop" id="dropper-drop-el"></div>
+            </div>
+            
+            <!-- Beaker Assembly -->
+            <div class="beaker-outer">
+              <div class="beaker-glass">
+                <div class="beaker-measurement-marks" aria-hidden="true">
+                  <span>- 400ml</span>
+                  <span>- 300ml</span>
+                  <span>- 200ml</span>
+                  <span>- 100ml</span>
+                </div>
+                <!-- Beaker liquid back layer -->
+                <div class="beaker-liquid" id="beaker-liquid-el"></div>
+                <!-- Canvas for bouncing molecules -->
+                <canvas id="beaker-canvas" width="220" height="180"></canvas>
+              </div>
+              <div class="beaker-stand" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <!-- Controls -->
+          <div class="sim-controls">
+            <div class="ph-slider-wrap">
+              <div class="ph-scale-labels" aria-hidden="true">
+                <span class="lbl-acid">ASİT (0)</span>
+                <span class="lbl-neutral">NÖTR (7)</span>
+                <span class="lbl-base">BAZ (14)</span>
+              </div>
+              <input type="range" id="ph-slider" min="0" max="14" step="0.1" value="7" aria-label="pH Seviyesi Ayarla" />
+              <div class="ph-display-wrap">
+                <span class="ph-label-tag">pH Seviyesi:</span>
+                <strong id="ph-value-display">7.0</strong>
+                <span class="ph-status-pill" id="ph-status-pill">Nötr</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Philosophical Reflection Column -->
+        <div class="sim-reflect-panel glass-panel reveal-scale-up delay-150">
+          <div class="reflect-header">
+            <span class="reflect-icon" id="reflect-icon-el">⚖️</span>
+            <h3 class="reflect-title" id="reflect-title-el">Denge ve Uyum</h3>
+          </div>
+          <div class="reflect-body">
+            <div class="quote-box">
+              <p class="reflect-desc" id="ph-feedback-text">"Bilim ile felsefenin kusursuz dengesi. Nötr bir çözeltide moleküller kararlı ve dengelidir. Zihniniz de yeni bilgilere açık, dengeli bir sorgulama modundadır."</p>
+            </div>
+            <div class="reflection-question">
+              <h4>🦉 Felsefi Sorgulama Sorusu:</h4>
+              <p id="ph-reflection-question">"Her şeyin dengede olduğu nötr bir dünyada, merakı ve gelişimi başlatan şey dengesizlik (asitlik veya bazlık) olabilir mi?"</p>
+            </div>
+          </div>
+          <div class="reflect-footer">
+            <p class="reflect-callout">Fen derslerini ezberleyerek değil, deneylerle ve sorgulayarak eğlenceli kılmak için doğru yerdesin!</p>
+            <a href="#iletisim" class="btn btn-primary premium-glow-btn" style="width: 100%; justify-content: center;">
+              Deney Atölyelerine Katıl 🔬
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── YAKLAŞIMIM ─── -->
+  <section class="approach" id="yaklasim" aria-labelledby="approach-heading">
+    <div class="section-container">
+      <div class="section-header text-center">
+        <span class="section-tag">Felsefem</span>
+        <h2 id="approach-heading" class="section-title">Neden <span class="gradient-text">Fensefe?</span></h2>
+        <p class="section-sub">Fen bilimleri + Felsefi sorgulama = Gerçek öğrenme</p>
+      </div>
+      <div class="approach-grid" role="list">
+        <article class="approach-card" role="listitem" aria-labelledby="card1-title">
+          <div class="approach-card-icon" aria-hidden="true">⚛️</div>
+          <h3 id="card1-title" class="approach-card-title">Bilimsel Merak</h3>
+          <p class="approach-card-text">
+            Her fen konusunu "Neden?" sorusuyla başlatıyorum. Formülleri değil,
+            onların arkasındaki mantığı öğretiyorum.
+          </p>
+        </article>
+        <article class="approach-card" role="listitem" aria-labelledby="card2-title">
+          <div class="approach-card-icon" aria-hidden="true">🦉</div>
+          <h3 id="card2-title" class="approach-card-title">P4C Yaklaşımı</h3>
+          <p class="approach-card-text">
+            Philosophy for Children yöntemiyle öğrencilerin kendi fikirlerini
+            geliştirmelerine, tartışmalarına ve eleştirel düşünmelerine zemin hazırlıyorum.
+          </p>
+        </article>
+        <article class="approach-card" role="listitem" aria-labelledby="card3-title">
+          <div class="approach-card-icon" aria-hidden="true">🧩</div>
+          <h3 id="card3-title" class="approach-card-title">Disiplinlerarası</h3>
+          <p class="approach-card-text">
+            Fen, felsefe, matematik ve sanatı bir arada ele alarak bütüncül bir
+            bakış açısı kazandırıyorum. Sınırlar yoktur, sorular vardır.
+          </p>
+        </article>
+        <article class="approach-card" role="listitem" aria-labelledby="card4-title">
+          <div class="approach-card-icon" aria-hidden="true">🏆</div>
+          <h3 id="card4-title" class="approach-card-title">Sınav Odaklı</h3>
+          <p class="approach-card-text">
+            LGS ve diğer sınavlara yönelik yeni nesil soru formatlarını öğrencilerin
+            düşünce biçimini geliştirerek aşmayı hedefliyorum.
+          </p>
+        </article>
+        <article class="approach-card" role="listitem" aria-labelledby="card5-title">
+          <div class="approach-card-icon" aria-hidden="true">💬</div>
+          <h3 id="card5-title" class="approach-card-title">Diyalog Temelli</h3>
+          <p class="approach-card-text">
+            Öğrenci-öğretmen hiyerarşisi yerine sınıfta diyalog ortamı kuruyorum.
+            Her soru değerlidir, her fikir dinlenmeye değerdir.
+          </p>
+        </article>
+        <article class="approach-card" role="listitem" aria-labelledby="card6-title">
+          <div class="approach-card-icon" aria-hidden="true">🌱</div>
+          <h3 id="card6-title" class="approach-card-title">Büyüme Zihniyeti</h3>
+          <p class="approach-card-text">
+            "Ben yapamam" yerine "Henüz yapamıyorum" diyebilen, gelişime açık
+            bireyler yetiştirmek için growth mindset yaklaşımını benimsiyorum.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── VİDEO HUB & REELS VITRINI ─── -->
+  <section class="video-hub" id="video-vitrin" aria-labelledby="video-heading">
+    <div class="glowing-orbs-container" aria-hidden="true">
+      <div class="glowing-orb orb-purple"></div>
+      <div class="glowing-orb orb-teal"></div>
+      <div class="glowing-orb orb-gold"></div>
+    </div>
+    <div class="section-container" style="position: relative; z-index: 1;">
+      <div class="section-header text-center">
+        <span class="section-tag">Medya Vitrini</span>
+        <h2 id="video-heading" class="section-title">Fensefe <span class="gradient-text">Ekranı</span></h2>
+        <p class="section-sub">Atölyelerimizdeki eğlenceli anları, yapay zeka tasarımlarımızı ve instagram reels içeriklerimizi keşfedin.</p>
+      </div>
+
+      <div class="video-hub-grid">
+        <!-- AI Cinematic explainer video card -->
+        <div class="ai-video-card reveal-fade-left" id="ai-video-trigger" aria-label="Fensefe Okulu Yapay Zeka Tanıtım Videosunu Oynat">
+          <!-- Video Cover graphic -->
+          <div class="ai-video-cover" id="ai-video-cover-el">
+            <div class="ai-video-cover-bg"></div>
+            <div class="ai-video-card-content">
+              <div class="ai-video-play-btn" role="button">
+                <span>▶</span>
+              </div>
+              <h3 class="ai-video-title">Fensefe Okulu Nedir?</h3>
+              <p class="ai-video-subtitle">Yapay zeka ile tasarlanmış, fen bilimleri ve felsefenin sentezini anlatan tanıtım ve sorgulama videosunu izleyin.</p>
+            </div>
+            <div class="ai-video-captions" id="ai-video-captions-el">
+              ✨ Sorgulayan zihinler için tasarlanmış yeni nesil eğitim vizyonu...
+            </div>
+          </div>
+
+          <!-- Active Simulated AI Player -->
+          <div class="ai-video-active-player" id="ai-video-player-el">
+            <button class="active-player-close" id="ai-player-close-btn" aria-label="Videoyu Kapat">✕ Kapat</button>
+            <div class="ai-visualizer-wave">
+              <div class="wave-bar"></div>
+              <div class="wave-bar"></div>
+              <div class="wave-bar"></div>
+              <div class="wave-bar"></div>
+              <div class="wave-bar"></div>
+            </div>
+            <div class="active-player-subtitle" id="ai-player-subtitle-el">
+              "Evreni anlamak için sadece formüllere değil, sorulara da ihtiyacımız var."
+            </div>
+          </div>
+        </div>
+
+        <!-- Instagram Reels display -->
+        <div class="reels-feed-container reveal-fade-right">
+          <div class="reels-header">
+            <div class="reels-title-wrap">
+              <span class="reels-badge-dot"></span>
+              <h3>Instagram Reels</h3>
+            </div>
+            <a href="https://www.instagram.com/fensefeokuluu" target="_blank" rel="noopener noreferrer" class="reels-ig-link">
+              @fensefeokuluu ↗
+            </a>
+          </div>
+
+          <div class="reels-feed-grid" role="list">
+            <!-- Reel Card 1 -->
+            <div class="reel-card" role="listitem" onclick="window.open('https://www.instagram.com/fensefeokuluu', '_blank')">
+              <img src="exp-chemistry-yellow.jpg" alt="Kimya Reaksiyonu Reels Kapak" class="reel-cover" />
+              <div class="reel-stats-float">
+                <span>❤️</span> 1.2K
+              </div>
+              <div class="reel-play-hover">
+                <div class="reel-play-icon-wrap">▶</div>
+              </div>
+              <div class="reel-overlay">
+                <h4 class="reel-title">Fen derslerinde ezber neden biter? Moleküler felsefe atölyesi!</h4>
+                <div class="reel-author">
+                  <span>⚛️</span> fensefeokuluu
+                </div>
+              </div>
+            </div>
+
+            <!-- Reel Card 2 -->
+            <div class="reel-card" role="listitem" onclick="window.open('https://www.instagram.com/fensefeokuluu', '_blank')">
+              <img src="exp-electrostatics.jpg" alt="Statik Elektrik Reels Kapak" class="reel-cover" />
+              <div class="reel-stats-float">
+                <span>❤️</span> 980
+              </div>
+              <div class="reel-play-hover">
+                <div class="reel-play-icon-wrap">▶</div>
+              </div>
+              <div class="reel-overlay">
+                <h4 class="reel-title">Balonlar ve statik elektrik! Kuvvet felsefeyle buluştuğunda.</h4>
+                <div class="reel-author">
+                  <span>⚡</span> fensefeokuluu
+                </div>
+              </div>
+            </div>
+
+            <!-- Reel Card 3 -->
+            <div class="reel-card" role="listitem" onclick="window.open('https://www.instagram.com/fensefeokuluu', '_blank')">
+              <img src="exp-chemistry-blue.jpg" alt="Mavi Reaksiyon Reels Kapak" class="reel-cover" />
+              <div class="reel-stats-float">
+                <span>❤️</span> 1.5K
+              </div>
+              <div class="reel-play-hover">
+                <div class="reel-play-icon-wrap">▶</div>
+              </div>
+              <div class="reel-overlay">
+                <h4 class="reel-title">Isı, enerji ve değişim! Bir fen atölyesinden fazlası.</h4>
+                <div class="reel-author">
+                  <span>🔬</span> fensefeokuluu
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── DENEY GALERİSİ ─── -->
+  <section class="gallery-section" id="galeri" aria-labelledby="gallery-heading">
+    <div class="section-container">
+      <div class="section-header text-center">
+        <span class="section-tag">Görsel Galeri</span>
+        <h2 id="gallery-heading" class="section-title">Deney Atölyemizden <span class="gradient-text">Kareler</span></h2>
+        <p class="section-sub">Fizik, kimya ve biyolojiyi felsefi bir sorgulamayla birleştirdiğimiz derslerimizden görüntüler (Büyütmek için tıklayın)</p>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item featured">
+          <img src="about-portrait.jpg" alt="Neslihan Köşger Fensefe Okulu Atölyesi" />
+          <div class="gallery-caption">
+            <h3>Fensefe Okulu Atölyesi</h3>
+            <p>Merak eden, araştıran ve sorgulayan nesiller yetiştiriyoruz.</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="exp-chemistry-yellow.jpg" alt="Fen ve Kimya Deneyleri" />
+          <div class="gallery-caption">
+            <h3>Kimya & Element Atölyesi</h3>
+            <p>Moleküller, bağlar ve renkli kimyasal değişimler.</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="exp-electrostatics.jpg" alt="Statik Elektrik ve Fizik Deneyleri" />
+          <div class="gallery-caption">
+            <h3>Statik Elektrik & Fizik</h3>
+            <p>Elektroskop ve balonlarla elektrostatik kuvvetleri keşfediyoruz.</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="exp-chemistry-blue.jpg" alt="Laboratuvarda Isı ve Reaksiyonlar" />
+          <div class="gallery-caption">
+            <h3>Isı ve Reaksiyon Atölyesi</h3>
+            <p>Alev, buhar ve termal reaksiyonların büyüleyici dünyası.</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="experiment-lab.jpg" alt="Cam Balon ve Titrasyon" />
+          <div class="gallery-caption">
+            <h3>Asit-Baz Titrasyonu</h3>
+            <p>Nötralleşme reaksiyonları ve pH indikatörleri ile ölçüm.</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="experiment-collage.jpg" alt="4'lü Fen ve Doğa Kolajı" />
+          <div class="gallery-caption">
+            <h3>Uygulamalı Doğa Atölyeleri</h3>
+            <p>Mikroskopla hücre incelemesi, yanardağ deneyi ve statik elektrik.</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="exp-collage2.jpg" alt="6'lı Laboratuvar Kolajı" />
+          <div class="gallery-caption">
+            <h3>Meraklı Bilim İnsanları</h3>
+            <p>Deney tüpleri, ısıtıcılar ve büyüleyici kimyasal süreçler.</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="exp-collage3.png" alt="3'lü Titrasyon ve Devre Kolajı" />
+          <div class="gallery-caption">
+            <h3>Elektrik & Mikroskop Atölyesi</h3>
+            <p>Basit elektrik devreleri, mikroskobik incelemeler ve çözeltiler.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── DERSLER ─── -->
+  <section class="courses" id="dersler" aria-labelledby="courses-heading">
+    <div class="section-container">
+      <div class="section-header text-center">
+        <span class="section-tag">Eğitim Programları</span>
+        <h2 id="courses-heading" class="section-title">Neler <span class="gradient-text">Öğretiyorum?</span></h2>
+        <p class="section-sub">Her öğrencinin ihtiyacına göre özel içerikler</p>
+      </div>
+      <div class="courses-grid">
+        <article class="course-card featured" id="course-lgs" aria-labelledby="course-lgs-title">
+          <div class="course-tag-badge" aria-label="En popüler">⭐ En Popüler</div>
+          <div class="course-icon" id="dom-c1-icon" aria-hidden="true">📐</div>
+          <h3 id="course-lgs-title" class="course-title"><span id="dom-c1-title">LGS Fen Bilimleri</span></h3>
+          <p class="course-desc" id="dom-c1-desc">
+            8. sınıf LGS sınavına kapsamlı hazırlık. Yeni nesil sorular, konu anlatımı
+            ve pratik çözüm teknikleri ile puanını zirveye taşı.
+          </p>
+          <ul class="course-features" aria-label="Ders özellikleri">
+            <li>✔ Tüm konuları kapsayan müfredat</li>
+            <li>✔ Yeni nesil soru çözüm tekniği</li>
+            <li>✔ Deneme sınavları &amp; analizler</li>
+            <li>✔ Bireysel geri bildirim</li>
+          </ul>
+          <a href="#iletisim" class="btn btn-primary" id="lgs-kayit-btn">Kayıt Ol</a>
+        </article>
+
+        <article class="course-card" id="course-p4c" aria-labelledby="course-p4c-title">
+          <div class="course-icon" id="dom-c2-icon" aria-hidden="true">🦉</div>
+          <h3 id="course-p4c-title" class="course-title"><span id="dom-c2-title">P4C Atölyesi</span></h3>
+          <p class="course-desc" id="dom-c2-desc">
+            Çocuklarla Felsefe yöntemiyle eleştirel düşünme, sorgulama ve
+            iletişim becerilerini geliştiren interaktif atölyeler.
+          </p>
+          <ul class="course-features" aria-label="Ders özellikleri">
+            <li>✔ Diyalog temelli öğrenme</li>
+            <li>✔ Eleştirel düşünme egzersizleri</li>
+            <li>✔ Grup tartışmaları</li>
+            <li>✔ 8-14 yaş arası uygun</li>
+          </ul>
+          <a href="#iletisim" class="btn btn-outline" id="p4c-kayit-btn">Detay Al</a>
+        </article>
+
+        <article class="course-card" id="course-fen" aria-labelledby="course-fen-title">
+          <div class="course-icon" id="dom-c3-icon" aria-hidden="true">🔬</div>
+          <h3 id="course-fen-title" class="course-title"><span id="dom-c3-title">Fen Bilimleri (5-7. Sınıf)</span></h3>
+          <p class="course-desc" id="dom-c3-desc">
+            Ortaokul fen müfredatını anlayarak öğren. Deney, gözlem ve
+            sorgulama ile fen dersini sevdiren yaklaşım.
+          </p>
+          <ul class="course-features" aria-label="Ders özellikleri">
+            <li>✔ Kavram haritaları ile öğrenme</li>
+            <li>✔ Günlük hayat bağlantılı anlatım</li>
+            <li>✔ Soru-cevap seansları</li>
+            <li>✔ Haftalık tekrar materyalleri</li>
+          </ul>
+          <a href="#iletisim" class="btn btn-outline" id="fen-kayit-btn">Detay Al</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── İÇERİKLER ─── -->
+  <section class="content-section" id="icerikler" aria-labelledby="content-heading">
+    <div class="section-container">
+      <div class="section-header text-center">
+        <span class="section-tag">Sosyal Medya</span>
+        <h2 id="content-heading" class="section-title">Son <span class="gradient-text">İçeriklerim</span></h2>
+        <p class="section-sub">Instagram ve YouTube'da paylaştığım içerikler</p>
+      </div>
+      <div class="content-grid" role="list" aria-label="Örnek içerikler">
+        <article class="content-card" role="listitem" aria-labelledby="post1-title">
+          <div class="content-card-visual" aria-hidden="true">
+            <div class="content-emoji">⚡</div>
+            <div class="content-type-badge">Reel</div>
+          </div>
+          <div class="content-card-body">
+            <h3 id="post1-title" class="content-card-title">Elektrik Neden Akar? — Felsefesiyle Anlat</h3>
+            <p class="content-card-desc">Elektronların hareketi sadece fizik değil, aynı zamanda "neden?" sorusunun cevabıdır.</p>
+            <div class="content-card-meta">
+              <span>📸 Instagram</span>
+              <span class="content-tag-pill">Fen Bilimleri</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-card" role="listitem" aria-labelledby="post2-title">
+          <div class="content-card-visual visual2" aria-hidden="true">
+            <div class="content-emoji">🧬</div>
+            <div class="content-type-badge">Gönderi</div>
+          </div>
+          <div class="content-card-body">
+            <h3 id="post2-title" class="content-card-title">LGS 2024 — Yeni Nesil Soru Analizi</h3>
+            <p class="content-card-desc">Bu yılki LGS sorularının ortak paydası ne? Sorgulama becerisi olmadan çözemezsiniz.</p>
+            <div class="content-card-meta">
+              <span>📸 Instagram</span>
+              <span class="content-tag-pill">LGS</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-card" role="listitem" aria-labelledby="post3-title">
+          <div class="content-card-visual visual3" aria-hidden="true">
+            <div class="content-emoji">🦉</div>
+            <div class="content-type-badge">Video</div>
+          </div>
+          <div class="content-card-body">
+            <h3 id="post3-title" class="content-card-title">P4C Nedir? — Çocuklarla Felsefe</h3>
+            <p class="content-card-desc">Çocuklarla felsefe yapmak mümkün mü? Sadece mümkün değil, gerekli!</p>
+            <div class="content-card-meta">
+              <span>▶ YouTube</span>
+              <span class="content-tag-pill">P4C</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-card" role="listitem" aria-labelledby="post4-title">
+          <div class="content-card-visual visual4" aria-hidden="true">
+            <div class="content-emoji">🌊</div>
+            <div class="content-type-badge">Gönderi</div>
+          </div>
+          <div class="content-card-body">
+            <h3 id="post4-title" class="content-card-title">Dalga mı, Parçacık mı? — Işığın Felsefesi</h3>
+            <p class="content-card-desc">Kuantum mekaniğinin en güzel sorusunu felsefi bir sorgulama ile keşfet.</p>
+            <div class="content-card-meta">
+              <span>📸 Instagram</span>
+              <span class="content-tag-pill">Fizik</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-card" role="listitem" aria-labelledby="post5-title">
+          <div class="content-card-visual visual5" aria-hidden="true">
+            <div class="content-emoji">🌱</div>
+            <div class="content-type-badge">Reel</div>
+          </div>
+          <div class="content-card-body">
+            <h3 id="post5-title" class="content-card-title">Fotosentez — Bitkiler Neden Yeşildir?</h3>
+            <p class="content-card-desc">Klorofil absorpsiyon spektrumu yeşili neden yansıtır? Biyoloji + optik = fensefe!</p>
+            <div class="content-card-meta">
+              <span>📸 Instagram</span>
+              <span class="content-tag-pill">Biyoloji</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-card cta-card" role="listitem" aria-labelledby="post6-title">
+          <div class="cta-card-inner">
+            <div class="cta-icon" aria-hidden="true">📲</div>
+            <h3 id="post6-title" class="cta-card-title">Daha Fazlası Instagram'da!</h3>
+            <p>Tüm içeriklerimi takip etmek için Instagram hesabımı ziyaret edin.</p>
+            <a href="https://www.instagram.com/fensefeokuluu" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="instagram-follow-btn" aria-label="Instagram'da takip et (yeni sekmede açılır)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              @fensefeokuluu
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── TESTIMONIAL ─── -->
+  <section class="testimonials" aria-labelledby="testimonials-heading">
+    <div class="section-container">
+      <div class="section-header text-center">
+        <span class="section-tag">Öğrenci Sesleri</span>
+        <h2 id="testimonials-heading" class="section-title">Ne Diyorlar?</h2>
+      </div>
+      <div class="testimonials-track" role="list" aria-label="Öğrenci yorumları">
+        <blockquote class="testimonial-card" role="listitem">
+          <div class="testimonial-stars" aria-label="5 yıldız">★★★★★</div>
+          <p class="testimonial-text" id="dom-t1-text">"Fen dersini hiç bu kadar eğlenceli bulmamıştım. Artık sadece formül ezberlemiyorum, gerçekten anlıyorum."</p>
+          <footer class="testimonial-author">
+            <div class="testimonial-avatar" aria-hidden="true">A</div>
+            <div>
+              <strong id="dom-t1-name">Ahmet K.</strong>
+              <span id="dom-t1-role">8. Sınıf Öğrencisi</span>
+            </div>
+          </footer>
+        </blockquote>
+        <blockquote class="testimonial-card" role="listitem">
+          <div class="testimonial-stars" aria-label="5 yıldız">★★★★★</div>
+          <p class="testimonial-text" id="dom-t2-text">"LGS'de fen puanım 15 puan arttı! Neslihan hoca öğrenciye nasıl düşüneceğini öğretiyor."</p>
+          <footer class="testimonial-author">
+            <div class="testimonial-avatar" aria-hidden="true">Z</div>
+            <div>
+              <strong id="dom-t2-name">Zeynep A.</strong>
+              <span id="dom-t2-role">LGS Mezunu</span>
+            </div>
+          </footer>
+        </blockquote>
+        <blockquote class="testimonial-card" role="listitem">
+          <div class="testimonial-stars" aria-label="5 yıldız">★★★★★</div>
+          <p class="testimonial-text" id="dom-t3-text">"P4C atölyesi çocuğumun bakış açısını tamamen değiştirdi. Artık her şeyi sorgular hale geldi!"</p>
+          <footer class="testimonial-author">
+            <div class="testimonial-avatar" aria-hidden="true">M</div>
+            <div>
+              <strong id="dom-t3-name">Merve S.</strong>
+              <span id="dom-t3-role">Veli</span>
+            </div>
+          </footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── İLETİŞİM ─── -->
+  <section class="contact" id="iletisim" aria-labelledby="contact-heading">
+    <div class="section-container">
+      <div class="contact-inner">
+        <div class="contact-info">
+          <span class="section-tag">Bize Ulaşın</span>
+          <h2 id="contact-heading" class="section-title"><span id="dom-contact-title">Hadi <span class="gradient-text">Konuşalım!</span></span></h2>
+          <p class="contact-desc" id="dom-contact-desc">
+            Dersler, atölyeler veya eğitim danışmanlığı için aşağıdaki kanallardan bize ulaşabilirsiniz.
+          </p>
+          <div class="contact-channels" role="list" aria-label="İletişim kanalları">
+            <a href="https://www.instagram.com/fensefeokuluu" target="_blank" rel="noopener noreferrer" class="contact-channel" role="listitem" id="contact-instagram-btn" aria-label="Instagram'a git">
+              <div class="channel-icon ig-icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              </div>
+              <div>
+                <strong>Instagram</strong>
+                <span>@fensefeokuluu</span>
+              </div>
+            </a>
+            <a href="https://www.youtube.com/@fensefeokulu" target="_blank" rel="noopener noreferrer" class="contact-channel" role="listitem" id="contact-youtube-btn" aria-label="YouTube'a git">
+              <div class="channel-icon yt-icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              </div>
+              <div>
+                <strong>YouTube</strong>
+                <span>@fensefeokulu</span>
+              </div>
+            </a>
+          </div>
+        </div>
+        <form class="contact-form" id="contact-form" novalidate aria-label="İletişim formu" onsubmit="handleFormSubmit(event)">
+          <div class="form-group">
+            <label class="form-label" for="form-name">Adınız Soyadınız</label>
+            <input class="form-input" type="text" id="form-name" name="name" placeholder="Adınızı girin" required autocomplete="name" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="form-email">E-posta Adresiniz</label>
+            <input class="form-input" type="email" id="form-email" name="email" placeholder="ornek@email.com" required autocomplete="email" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="form-subject">Konu</label>
+            <select class="form-input form-select" id="form-subject" name="subject" required>
+              <option value="" disabled selected>Konuyu seçin</option>
+              <option value="lgs">LGS Fen Hazırlık</option>
+              <option value="p4c">P4C Atölyesi</option>
+              <option value="fen">Fen Bilimleri Dersi</option>
+              <option value="diger">Diğer</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="form-message">Mesajınız</label>
+            <textarea class="form-input form-textarea" id="form-message" name="message" placeholder="Bize bir şeyler yazın..." required rows="4"></textarea>
+          </div>
+          <button class="btn btn-primary btn-full" type="submit" id="form-submit-btn">
+            Mesaj Gönder ✉
+          </button>
+          <p class="form-success" id="form-success" role="status" aria-live="polite" hidden>
+            ✅ Mesajınız alındı! En kısa sürede size dönüş yapacağız.
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a class="nav-logo" href="#anasayfa" aria-label="Fensefe Okulu Ana Sayfa">
+          <img src="logo.jpg" alt="Fensefe Logo" class="navbar-logo-img" />
+          <span class="logo-text">
+            <span class="logo-fen">Fen</span><span class="logo-sefe">sefe</span>
+            <small>Okulu</small>
+          </span>
+        </a>
+        <p class="footer-tagline">Bilimi sorgulayan, felsefeyi seven, düşünen nesiller.</p>
+        <div class="footer-social" aria-label="Sosyal medya linkleri">
+          <a href="https://www.instagram.com/fensefeokuluu" target="_blank" rel="noopener noreferrer" class="social-btn" id="footer-instagram-btn" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@fensefeokulu" target="_blank" rel="noopener noreferrer" class="social-btn" id="footer-youtube-btn" aria-label="YouTube">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+        </div>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigasyon">
+        <h3 class="footer-nav-title">Hızlı Linkler</h3>
+        <ul role="list">
+          <li><a href="#hakkimda">Hakkımda</a></li>
+          <li><a href="#yaklasim">Yaklaşımım</a></li>
+          <li><a href="#galeri">Galeri</a></li>
+          <li><a href="#dersler">Dersler</a></li>
+          <li><a href="#icerikler">İçerikler</a></li>
+          <li><a href="#iletisim">İletişim</a></li>
+          <li><a href="admin.html" style="opacity: 0.5; font-size: 0.8rem; display: flex; align-items: center; gap: 4px;">🔐 Yönetim</a></li>
+        </ul>
+      </nav>
+      <div class="footer-quote">
+        <blockquote>
+          <p id="dom-footer-quote">"Bilmek yeterli değildir; uygulamalıyız. İstemek yeterli değildir; yapmalıyız."</p>
+          <cite id="dom-footer-cite">— Goethe</cite>
+        </blockquote>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Fensefe Okulu · Uzm. Öğr. Neslihan Köşger · Tüm hakları saklıdır.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

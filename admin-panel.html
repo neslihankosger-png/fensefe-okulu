@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel — Fensefe Okulu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy:#0a0e1a; --navy-mid:#111827; --navy-light:#1a2340; --navy-card:#1e2a45;
+      --purple:#6c3de0; --purple-mid:#8b5cf6; --purple-light:#a78bfa;
+      --gold:#f4b942; --teal:#06b6d4; --teal-light:#22d3ee;
+      --green:#10b981; --red:#ef4444;
+      --white:#fff; --gray-100:#e8eaf6; --gray-300:#94a3b8; --gray-500:#475569;
+      --gradient-brand:linear-gradient(135deg,#6c3de0 0%,#06b6d4 100%);
+      --font:'Outfit',sans-serif;
+      --sidebar-w:260px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:var(--font);background:var(--navy);color:var(--white);min-height:100vh;display:flex;}
+
+    /* ── SIDEBAR ── */
+    .sidebar{
+      width:var(--sidebar-w); min-height:100vh; background:var(--navy-mid);
+      border-right:1px solid rgba(108,61,224,.2);
+      display:flex; flex-direction:column;
+      position:fixed; top:0; left:0; z-index:100;
+    }
+    .sidebar-logo{
+      padding:1.5rem; display:flex; align-items:center; gap:.75rem;
+      border-bottom:1px solid rgba(108,61,224,.15);
+    }
+    .sidebar-logo .icon{font-size:1.8rem;}
+    .sidebar-logo h1{font-size:1.1rem; font-weight:800; line-height:1.2;}
+    .sidebar-logo span:first-of-type{color:#22d3ee;}
+    .sidebar-logo span:last-of-type{color:#a78bfa;}
+    .sidebar-logo small{font-size:.65rem; color:var(--gray-300); display:block; letter-spacing:.1em; text-transform:uppercase;}
+
+    .sidebar-nav{flex:1; padding:1rem 0; overflow-y:auto;}
+    .nav-section-title{
+      font-size:.65rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+      color:var(--gray-500); padding:.5rem 1.25rem; margin-top:.5rem;
+    }
+    .nav-item{
+      display:flex; align-items:center; gap:.75rem;
+      padding:.7rem 1.25rem; margin:2px .5rem;
+      border-radius:10px; cursor:pointer; transition:.2s;
+      font-size:.9rem; font-weight:500; color:var(--gray-300);
+      border:none; background:none; width:calc(100% - 1rem); text-align:left;
+    }
+    .nav-item:hover{background:rgba(255,255,255,.06); color:var(--white);}
+    .nav-item.active{background:rgba(108,61,224,.2); color:var(--purple-light); font-weight:600;}
+    .nav-item .nav-icon{font-size:1.1rem; width:20px; text-align:center;}
+
+    .sidebar-footer{
+      padding:1rem 1.25rem;
+      border-top:1px solid rgba(108,61,224,.15);
+      font-size:.8rem; color:var(--gray-500);
+    }
+    .sidebar-footer a{color:var(--purple-light); text-decoration:none;}
+
+    /* ── MAIN ── */
+    .main{margin-left:var(--sidebar-w); flex:1; display:flex; flex-direction:column; min-height:100vh;}
+
+    .topbar{
+      background:var(--navy-mid); border-bottom:1px solid rgba(108,61,224,.15);
+      padding:.9rem 2rem; display:flex; align-items:center; justify-content:space-between;
+      position:sticky; top:0; z-index:50;
+    }
+    .topbar h2{font-size:1.1rem; font-weight:700; color:var(--white);}
+    .topbar-actions{display:flex; align-items:center; gap:.75rem;}
+    .btn{
+      display:inline-flex; align-items:center; gap:.4rem;
+      padding:.5em 1.2em; border-radius:100px;
+      font-family:var(--font); font-size:.85rem; font-weight:600;
+      cursor:pointer; border:none; transition:.2s; white-space:nowrap;
+    }
+    .btn-primary{background:var(--gradient-brand); color:#fff;}
+    .btn-primary:hover{filter:brightness(1.1); transform:translateY(-1px);}
+    .btn-ghost{background:rgba(255,255,255,.08); color:#fff; border:1px solid rgba(255,255,255,.15);}
+    .btn-ghost:hover{background:rgba(255,255,255,.14);}
+    .btn-green{background:rgba(16,185,129,.15); color:var(--green); border:1px solid rgba(16,185,129,.3);}
+    .btn-green:hover{background:rgba(16,185,129,.25);}
+    .btn-red{background:rgba(239,68,68,.12); color:#ff8a8a; border:1px solid rgba(239,68,68,.25);}
+    .btn-red:hover{background:rgba(239,68,68,.22);}
+
+    .content{padding:2rem; flex:1;}
+
+    /* ── PANELS (sections) ── */
+    .panel{display:none;}
+    .panel.active{display:block;}
+
+    /* ── DASHBOARD ── */
+    .stats-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; margin-bottom:2rem;}
+    .stat-card{
+      background:var(--navy-light); border:1px solid rgba(108,61,224,.2);
+      border-radius:16px; padding:1.5rem;
+    }
+    .stat-card .sc-icon{font-size:2rem; margin-bottom:.75rem;}
+    .stat-card .sc-val{font-size:2rem; font-weight:800; background:var(--gradient-brand); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;}
+    .stat-card .sc-label{font-size:.8rem; color:var(--gray-300); margin-top:.25rem;}
+
+    .quick-links{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1rem;}
+    .quick-link{
+      background:var(--navy-light); border:1px solid rgba(108,61,224,.15);
+      border-radius:14px; padding:1.25rem; cursor:pointer;
+      transition:.2s; display:flex; align-items:center; gap:.75rem;
+      font-size:.9rem; font-weight:600;
+    }
+    .quick-link:hover{border-color:var(--purple-mid); background:rgba(108,61,224,.1);}
+
+    /* ── SECTION TITLE ── */
+    .section-head{margin-bottom:1.5rem;}
+    .section-head h3{font-size:1.2rem; font-weight:700;}
+    .section-head p{font-size:.85rem; color:var(--gray-300); margin-top:.25rem;}
+
+    /* ── FORM ELEMENTS ── */
+    .edit-card{
+      background:var(--navy-light); border:1px solid rgba(108,61,224,.2);
+      border-radius:16px; padding:1.75rem; margin-bottom:1.25rem;
+    }
+    .edit-card h4{font-size:.95rem; font-weight:700; margin-bottom:1.25rem; color:var(--gold); display:flex; align-items:center; gap:.5rem;}
+    .form-row{display:grid; grid-template-columns:1fr 1fr; gap:1rem;}
+    .form-group{margin-bottom:1rem;}
+    .form-group:last-child{margin-bottom:0;}
+    label{display:block; font-size:.78rem; font-weight:600; color:var(--gray-300); margin-bottom:.35rem; letter-spacing:.04em; text-transform:uppercase;}
+    input[type=text], input[type=email], input[type=password], input[type=url], textarea, select{
+      width:100%; padding:.7em .9em;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(108,61,224,.2);
+      border-radius:10px;
+      font-family:var(--font); font-size:.9rem; color:var(--white);
+      outline:none; transition:.2s;
+    }
+    input:focus, textarea:focus, select:focus{
+      border-color:var(--purple-mid); background:rgba(108,61,224,.1);
+      box-shadow:0 0 0 3px rgba(108,61,224,.15);
+    }
+    input::placeholder, textarea::placeholder{color:var(--gray-500);}
+    textarea{resize:vertical; min-height:90px;}
+    select option{background:var(--navy-mid); color:#fff;}
+    .input-hint{font-size:.75rem; color:var(--gray-500); margin-top:.3rem;}
+
+    /* ── TOAST ── */
+    .toast{
+      position:fixed; bottom:2rem; right:2rem; z-index:9999;
+      background:rgba(16,185,129,.15); border:1px solid rgba(16,185,129,.4);
+      color:var(--green); border-radius:12px; padding:1rem 1.5rem;
+      font-size:.9rem; font-weight:600; display:none; align-items:center; gap:.5rem;
+      animation:slide-in .3s ease;
+    }
+    @keyframes slide-in{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+
+    /* ── PUBLISH BOX ── */
+    .publish-box{
+      background:linear-gradient(135deg,rgba(108,61,224,.15),rgba(6,182,212,.08));
+      border:1px solid rgba(108,61,224,.35);
+      border-radius:20px; padding:2rem; margin-bottom:2rem;
+    }
+    .publish-box h3{font-size:1.1rem; font-weight:700; margin-bottom:.5rem;}
+    .publish-box p{font-size:.88rem; color:var(--gray-300); margin-bottom:1.25rem; line-height:1.6;}
+    .publish-steps{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; margin-bottom:1.5rem;}
+    .step-card{background:rgba(0,0,0,.2); border-radius:12px; padding:1rem; text-align:center;}
+    .step-num{width:32px;height:32px;border-radius:50%;background:var(--gradient-brand);font-weight:800;font-size:.9rem;display:flex;align-items:center;justify-content:center;margin:0 auto .75rem;}
+    .step-card p{font-size:.8rem; color:var(--gray-300); margin-top:.4rem; line-height:1.5;}
+    .step-card strong{font-size:.9rem;}
+
+    .netlify-url{
+      background:rgba(0,0,0,.25); border:1px solid rgba(108,61,224,.3);
+      border-radius:10px; padding:.75rem 1rem; font-family:monospace; font-size:.85rem;
+      color:var(--teal-light); display:flex; align-items:center; justify-content:space-between;
+      margin-top:1rem;
+    }
+    .copy-btn{
+      background:rgba(6,182,212,.15); border:none; color:var(--teal-light);
+      padding:.3em .8em; border-radius:6px; cursor:pointer; font-size:.75rem;
+      font-family:var(--font); font-weight:600; transition:.2s;
+    }
+    .copy-btn:hover{background:rgba(6,182,212,.3);}
+
+    /* ── SETTINGS ── */
+    .settings-tabs{display:flex; gap:.5rem; margin-bottom:1.5rem; flex-wrap:wrap;}
+    .stab{
+      padding:.5em 1.1em; border-radius:100px;
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1);
+      color:var(--gray-300); font-size:.85rem; font-weight:600; cursor:pointer; transition:.2s;
+    }
+    .stab.active{background:rgba(108,61,224,.25); border-color:var(--purple-mid); color:var(--purple-light);}
+
+    /* ── MOBILE SIDEBAR ── */
+    .mobile-toggle{
+      display:none; position:fixed; top:1rem; left:1rem; z-index:200;
+      background:var(--navy-mid); border:1px solid rgba(108,61,224,.3);
+      border-radius:10px; padding:.5rem; cursor:pointer; color:#fff; font-size:1.2rem;
+    }
+    @media(max-width:768px){
+      .sidebar{transform:translateX(-100%); transition:.3s;}
+      .sidebar.open{transform:translateX(0);}
+      .main{margin-left:0;}
+      .mobile-toggle{display:flex; align-items:center; justify-content:center;}
+      .form-row{grid-template-columns:1fr;}
+      .topbar{padding:.9rem 1rem;}
+      .content{padding:1rem;}
+      .topbar h2{font-size:.95rem;}
+    }
+  </style>
+</head>
+<body>
+
+<button class="mobile-toggle" id="mob-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+
+<!-- ── SIDEBAR ── -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <span class="icon">⚛</span>
+    <div>
+      <h1><span>Fen</span><span>sefe</span></h1>
+      <small>Yönetim Paneli</small>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section-title">Genel</div>
+    <button class="nav-item active" onclick="showPanel('dashboard', this)">
+      <span class="nav-icon">🏠</span> Gösterge Paneli
+    </button>
+    <button class="nav-item" onclick="showPanel('publish', this)">
+      <span class="nav-icon">🚀</span> Yayınla / Deploy
+    </button>
+
+    <div class="nav-section-title">İçerik Düzenle</div>
+    <button class="nav-item" onclick="showPanel('hero', this)">
+      <span class="nav-icon">🎯</span> Ana Sayfa (Hero)
+    </button>
+    <button class="nav-item" onclick="showPanel('about', this)">
+      <span class="nav-icon">👩‍🏫</span> Hakkımda
+    </button>
+    <button class="nav-item" onclick="showPanel('courses', this)">
+      <span class="nav-icon">📚</span> Dersler
+    </button>
+    <button class="nav-item" onclick="showPanel('testimonials', this)">
+      <span class="nav-icon">💬</span> Öğrenci Yorumları
+    </button>
+    <button class="nav-item" onclick="showPanel('contact', this)">
+      <span class="nav-icon">📬</span> İletişim
+    </button>
+
+    <div class="nav-section-title">Sistem</div>
+    <button class="nav-item" onclick="showPanel('settings', this)">
+      <span class="nav-icon">⚙️</span> Ayarlar
+    </button>
+    <button class="nav-item" onclick="doLogout()">
+      <span class="nav-icon">🚪</span> Çıkış Yap
+    </button>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a href="index.html" target="_blank">← Siteyi Görüntüle</a><br/>
+    <span style="opacity:.5; font-size:.72rem;">Fensefe Okulu v1.0</span>
+  </div>
+</aside>
+
+<!-- ── MAIN ── -->
+<main class="main">
+  <div class="topbar">
+    <h2 id="page-title">🏠 Gösterge Paneli</h2>
+    <div class="topbar-actions">
+      <button class="btn btn-green" onclick="saveAll()">💾 Kaydet</button>
+      <a href="index.html" target="_blank" class="btn btn-ghost">👁 Önizle</a>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ─── DASHBOARD ─── -->
+    <div class="panel active" id="panel-dashboard">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="sc-icon">📸</div>
+          <div class="sc-val">2.338</div>
+          <div class="sc-label">Instagram Takipçisi</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-icon">📝</div>
+          <div class="sc-val">41</div>
+          <div class="sc-label">Paylaşılan İçerik</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-icon">📚</div>
+          <div class="sc-val">3</div>
+          <div class="sc-label">Ders Programı</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-icon">⭐</div>
+          <div class="sc-val">100%</div>
+          <div class="sc-label">Öğrenci Memnuniyeti</div>
+        </div>
+      </div>
+
+      <div class="section-head">
+        <h3>Hızlı Erişim</h3>
+        <p>Sık kullandığınız panellere hızlıca geçin</p>
+      </div>
+      <div class="quick-links">
+        <div class="quick-link" onclick="showPanel('hero',null)">🎯 Hero Metni Düzenle</div>
+        <div class="quick-link" onclick="showPanel('about',null)">👩‍🏫 Hakkımda Güncelle</div>
+        <div class="quick-link" onclick="showPanel('courses',null)">📚 Dersler Düzenle</div>
+        <div class="quick-link" onclick="showPanel('publish',null)">🚀 Siteyi Yayınla</div>
+        <div class="quick-link" onclick="showPanel('contact',null)">📬 İletişim Bilgileri</div>
+        <div class="quick-link" onclick="showPanel('settings',null)">⚙️ Ayarlar</div>
+      </div>
+    </div>
+
+    <!-- ─── PUBLISH ─── -->
+    <div class="panel" id="panel-publish">
+      <div class="publish-box">
+        <h3>🚀 Siteyi İnternete Yayınla (ÜCRETSİZ)</h3>
+        <p>Netlify ile Google hesabınla 5 dakikada ücretsiz yayınla. Alan adı otomatik verilir (fensefe.netlify.app gibi).</p>
+        <div class="publish-steps">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <strong>netlify.com'a git</strong>
+            <p>Sağ üstte "Sign up" → "Continue with Google" ile Google hesabınla giriş yap</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <strong>Klasörü Sürükle</strong>
+            <p>"Deploy manually" bölümüne <strong>fensefe-okulu</strong> klasörünü sürükle-bırak</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <strong>Hazır!</strong>
+            <p>Netlify otomatik link verir: <em>fensefe-xxxx.netlify.app</em> — paylaşmaya hazır!</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">4</div>
+            <strong>Güncelleme</strong>
+            <p>İçerik değişince "Kaydet" → klasörü tekrar Netlify'a sürükle → otomatik güncellenir</p>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="window.open('https://netlify.com','_blank')">
+          🌐 Netlify'ı Aç
+        </button>
+        <div class="netlify-url">
+          <span>https://app.netlify.com/drop</span>
+          <button class="copy-btn" onclick="copyText('https://app.netlify.com/drop')">Kopyala</button>
+        </div>
+      </div>
+
+      <div class="edit-card">
+        <h4>📂 Siteyi Kaydet & İndir</h4>
+        <p style="color:var(--gray-300);font-size:.88rem;margin-bottom:1rem;line-height:1.6;">
+          Yaptığınız değişiklikler kaydedildikten sonra <strong>fensefe-okulu</strong> klasörü
+          Netlify'a sürükleyerek yayınlanır. Klasörün konumu:
+        </p>
+        <div class="netlify-url" style="flex-direction:column;align-items:flex-start;gap:.5rem;">
+          <span style="font-size:.75rem;color:var(--gray-500);">Klasör Yolu:</span>
+          <span id="folder-path" style="word-break:break-all;"></span>
+        </div>
+        <div style="margin-top:1rem; display:flex; gap:.75rem; flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="saveAll()">💾 Değişiklikleri Kaydet</button>
+          <button class="btn btn-ghost" onclick="openFolder()">📂 Klasörü Aç</button>
+        </div>
+      </div>
+
+      <div class="edit-card">
+        <h4>🌐 Kendi Alan Adını Bağla (İsteğe Bağlı)</h4>
+        <p style="color:var(--gray-300);font-size:.85rem;line-height:1.6;margin-bottom:1rem;">
+          fensefeokulu.com.tr gibi kendi adresinizi Netlify'a bağlayabilirsiniz.<br/>
+          Netlify Dashboard → Site ayarları → Domain management → "Add custom domain"
+        </p>
+        <div class="form-group">
+          <label>Alan Adınız (varsa)</label>
+          <input type="url" id="custom-domain" placeholder="https://fensefeokulu.com.tr" />
+          <span class="input-hint">İsimtescil.com veya Turhost'tan satın alınabilir (~300₺/yıl)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── HERO ─── -->
+    <div class="panel" id="panel-hero">
+      <div class="section-head">
+        <h3>🎯 Ana Sayfa (Hero) Düzenle</h3>
+        <p>Sitenin açılış ekranındaki metinleri buradan değiştirin</p>
+      </div>
+      <div class="edit-card">
+        <h4>✍️ Hero Metinleri</h4>
+        <div class="form-group">
+          <label>Site Adı (Sol)</label>
+          <input type="text" id="hero-left" value="FEN" />
+        </div>
+        <div class="form-group">
+          <label>Site Adı (Sağ)</label>
+          <input type="text" id="hero-right" value="FELSEFE" />
+        </div>
+        <div class="form-group">
+          <label>Alt Başlık (Kombinasyon)</label>
+          <input type="text" id="hero-combined" value="FENSEFE" />
+        </div>
+        <div class="form-group">
+          <label>Rozet Yazısı (Üstteki küçük etiket)</label>
+          <input type="text" id="hero-badge" value="Yeni Nesil Eğitim Platformu" />
+        </div>
+        <div class="form-group">
+          <label>Ana Açıklama</label>
+          <textarea id="hero-desc">Bilimi sorgulayan, felsefeyi seven, düşünen bireyler yetiştiriyoruz. Uzm. Öğr. Neslihan Köşger ile eğitime yeni bir soluk katın.</textarea>
+        </div>
+      </div>
+      <div class="edit-card">
+        <h4>📊 İstatistikler</h4>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Takipçi Sayısı</label>
+            <input type="text" id="stat-followers" value="2338" />
+          </div>
+          <div class="form-group">
+            <label>İçerik Sayısı</label>
+            <input type="text" id="stat-posts" value="41" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ABOUT ─── -->
+    <div class="panel" id="panel-about">
+      <div class="section-head">
+        <h3>👩‍🏫 Hakkımda Bölümü</h3>
+        <p>Kendinizi tanıtan bölümü güncelleyin</p>
+      </div>
+      <div class="edit-card">
+        <h4>👤 Kişisel Bilgiler</h4>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Ad Soyad</label>
+            <input type="text" id="about-name" value="Neslihan Köşger" />
+          </div>
+          <div class="form-group">
+            <label>Unvan</label>
+            <input type="text" id="about-title" value="Uzm. Öğr." />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Kısa Alıntı (İtalik)</label>
+          <textarea id="about-quote">"Fen bilimleri ve felsefeyi birleştirerek öğrencilerimi hem bilim insanı hem de sorgulayan birey olarak yetiştirmeyi hedefliyorum."</textarea>
+        </div>
+        <div class="form-group">
+          <label>1. Paragraf</label>
+          <textarea id="about-p1">Yıllardır sürdürdüğüm eğitim yolculuğumda, fen bilimlerini ezberden değil anlayarak öğretmenin peşindeyim. Bunun için felsefi düşünce yöntemlerini derslerime entegre ettim. Bu sentezi Fensefe Okulu adıyla bir platforma taşıdım.</textarea>
+        </div>
+        <div class="form-group">
+          <label>2. Paragraf</label>
+          <textarea id="about-p2">P4C (Philosophy for Children / Çocuklarla Felsefe) yaklaşımını temel alarak öğrencilerimin merak etmesini, sorgulamasını ve keşfetmesini sağlıyorum. Çünkü düşünen bir öğrenci, her sınavı aşabilir.</textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── COURSES ─── -->
+    <div class="panel" id="panel-courses">
+      <div class="section-head">
+        <h3>📚 Dersler & Programlar</h3>
+        <p>Sunduğunuz ders programlarını düzenleyin</p>
+      </div>
+
+      <div class="edit-card">
+        <h4>⭐ Ders 1 — Öne Çıkan</h4>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Ders Adı</label>
+            <input type="text" id="c1-title" value="LGS Fen Bilimleri" />
+          </div>
+          <div class="form-group">
+            <label>İkon (Emoji)</label>
+            <input type="text" id="c1-icon" value="📐" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Açıklama</label>
+          <textarea id="c1-desc">8. sınıf LGS sınavına kapsamlı hazırlık. Yeni nesil sorular, konu anlatımı ve pratik çözüm teknikleri ile puanını zirveye taşı.</textarea>
+        </div>
+      </div>
+
+      <div class="edit-card">
+        <h4>🦉 Ders 2</h4>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Ders Adı</label>
+            <input type="text" id="c2-title" value="P4C Atölyesi" />
+          </div>
+          <div class="form-group">
+            <label>İkon (Emoji)</label>
+            <input type="text" id="c2-icon" value="🦉" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Açıklama</label>
+          <textarea id="c2-desc">Çocuklarla Felsefe yöntemiyle eleştirel düşünme, sorgulama ve iletişim becerilerini geliştiren interaktif atölyeler.</textarea>
+        </div>
+      </div>
+
+      <div class="edit-card">
+        <h4>🔬 Ders 3</h4>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Ders Adı</label>
+            <input type="text" id="c3-title" value="Fen Bilimleri (5-7. Sınıf)" />
+          </div>
+          <div class="form-group">
+            <label>İkon (Emoji)</label>
+            <input type="text" id="c3-icon" value="🔬" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Açıklama</label>
+          <textarea id="c3-desc">Ortaokul fen müfredatını anlayarak öğren. Deney, gözlem ve sorgulama ile fen dersini sevdiren yaklaşım.</textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── TESTIMONIALS ─── -->
+    <div class="panel" id="panel-testimonials">
+      <div class="section-head">
+        <h3>💬 Öğrenci Yorumları</h3>
+        <p>Sitede görünen yorumları güncelleyin</p>
+      </div>
+
+      <div class="edit-card">
+        <h4>💬 Yorum 1</h4>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Ad</label>
+            <input type="text" id="t1-name" value="Ahmet K." />
+          </div>
+          <div class="form-group">
+            <label>Ünvan/Sınıf</label>
+            <input type="text" id="t1-role" value="8. Sınıf Öğrencisi" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Yorum</label>
+          <textarea id="t1-text">"Fen dersini hiç bu kadar eğlenceli bulmamıştım. Artık sadece formül ezberlemiyorum, gerçekten anlıyorum."</textarea>
+        </div>
+      </div>
+
+      <div class="edit-card">
+        <h4>💬 Yorum 2</h4>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Ad</label>
+            <input type="text" id="t2-name" value="Zeynep A." />
+          </div>
+          <div class="form-group">
+            <label>Ünvan/Sınıf</label>
+            <input type="text" id="t2-role" value="LGS Mezunu" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Yorum</label>
+          <textarea id="t2-text">"LGS'de fen puanım 15 puan arttı! Neslihan hoca öğrenciye nasıl düşüneceğini öğretiyor."</textarea>
+        </div>
+      </div>
+
+      <div class="edit-card">
+        <h4>💬 Yorum 3</h4>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Ad</label>
+            <input type="text" id="t3-name" value="Merve S." />
+          </div>
+          <div class="form-group">
+            <label>Ünvan/Sınıf</label>
+            <input type="text" id="t3-role" value="Veli" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Yorum</label>
+          <textarea id="t3-text">"P4C atölyesi çocuğumun bakış açısını tamamen değiştirdi. Artık her şeyi sorgular hale geldi!"</textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── CONTACT ─── -->
+    <div class="panel" id="panel-contact">
+      <div class="section-head">
+        <h3>📬 İletişim Bilgileri</h3>
+        <p>Sosyal medya ve iletişim bilgilerinizi güncelleyin</p>
+      </div>
+      <div class="edit-card">
+        <h4>📱 Sosyal Medya</h4>
+        <div class="form-group">
+          <label>Instagram Kullanıcı Adı</label>
+          <input type="text" id="social-ig" value="fensefeokuluu" />
+          <span class="input-hint">Başında @ olmadan yazın</span>
+        </div>
+        <div class="form-group">
+          <label>YouTube Kanalı</label>
+          <input type="text" id="social-yt" value="fensefeokulu" />
+          <span class="input-hint">youtube.com/@... kısmından sonraki kısım</span>
+        </div>
+        <div class="form-group">
+          <label>İletişim E-posta (opsiyonel)</label>
+          <input type="email" id="contact-email" placeholder="iletisim@fensefeokulu.com" />
+        </div>
+      </div>
+      <div class="edit-card">
+        <h4>📝 İletişim Bölümü Metni</h4>
+        <div class="form-group">
+          <label>Başlık</label>
+          <input type="text" id="contact-title" value="Hadi Konuşalım!" />
+        </div>
+        <div class="form-group">
+          <label>Açıklama</label>
+          <textarea id="contact-desc">Dersler, atölyeler veya eğitim danışmanlığı için aşağıdaki kanallardan bize ulaşabilirsiniz.</textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── SETTINGS ─── -->
+    <div class="panel" id="panel-settings">
+      <div class="section-head">
+        <h3>⚙️ Site Ayarları</h3>
+        <p>Giriş bilgileri ve genel site ayarları</p>
+      </div>
+
+      <div class="settings-tabs">
+        <button class="stab active" onclick="showStab('stab-account',this)">👤 Hesap</button>
+        <button class="stab" onclick="showStab('stab-seo',this)">🔍 SEO</button>
+        <button class="stab" onclick="showStab('stab-appearance',this)">🎨 Görünüm</button>
+      </div>
+
+      <div id="stab-account">
+        <div class="edit-card">
+          <h4>🔐 Giriş Bilgilerini Değiştir</h4>
+          <div class="form-group">
+            <label>Yeni Kullanıcı Adı</label>
+            <input type="text" id="new-user" placeholder="Yeni kullanıcı adı" />
+          </div>
+          <div class="form-group">
+            <label>Yeni Şifre</label>
+            <input type="password" id="new-pass" placeholder="En az 8 karakter" />
+          </div>
+          <div class="form-group">
+            <label>Şifre Tekrar</label>
+            <input type="password" id="new-pass2" placeholder="Şifreyi tekrar girin" />
+          </div>
+          <button class="btn btn-primary" onclick="changePassword()" style="margin-top:.5rem;">🔒 Şifreyi Güncelle</button>
+        </div>
+      </div>
+
+      <div id="stab-seo" style="display:none;">
+        <div class="edit-card">
+          <h4>🔍 SEO Ayarları</h4>
+          <div class="form-group">
+            <label>Site Başlığı</label>
+            <input type="text" id="seo-title" value="Fensefe Okulu | Fen & Felsefe ile Düşünen Nesiller" />
+          </div>
+          <div class="form-group">
+            <label>Meta Açıklaması</label>
+            <textarea id="seo-desc">Fensefe Okulu — Uzm. Öğr. Neslihan Köşger ile fen bilimleri ve felsefi düşünceyi bir araya getiren yenilikçi eğitim platformu. LGS hazırlık, P4C yaklaşımı.</textarea>
+          </div>
+          <div class="form-group">
+            <label>Anahtar Kelimeler</label>
+            <input type="text" id="seo-keywords" value="fensefe okulu, fen bilimleri, P4C, LGS hazırlık, Neslihan Köşger" />
+          </div>
+        </div>
+      </div>
+
+      <div id="stab-appearance" style="display:none;">
+        <div class="edit-card">
+          <h4>🎨 Renk ve Görünüm</h4>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Ana Renk (Mor)</label>
+              <input type="color" id="color-primary" value="#6c3de0" style="height:40px;padding:.2em;" />
+            </div>
+            <div class="form-group">
+              <label>Vurgu Rengi (Teal)</label>
+              <input type="color" id="color-accent" value="#06b6d4" style="height:40px;padding:.2em;" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Footer Alıntısı</label>
+            <textarea id="footer-quote">"Bilmek yeterli değildir; uygulamalıyız. İstemek yeterli değildir; yapmalıyız."</textarea>
+          </div>
+          <div class="form-group">
+            <label>Footer Alıntı Kaynağı</label>
+            <input type="text" id="footer-cite" value="Goethe" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</main>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✅ Değişiklikler kaydedildi!</div>
+
+<script>
+// ── Auth guard
+if (sessionStorage.getItem('fo_admin_logged') !== 'true') {
+  window.location.href = 'admin.html';
+}
+
+// ── Folder path
+document.getElementById('folder-path').textContent =
+  window.location.pathname.replace('/admin-panel.html','') || '/fensefe-okulu';
+
+// ── Panel switching
+function showPanel(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  if (btn) btn.classList.add('active');
+  const titles = {
+    dashboard:'🏠 Gösterge Paneli', publish:'🚀 Yayınla / Deploy',
+    hero:'🎯 Ana Sayfa (Hero)', about:'👩‍🏫 Hakkımda',
+    courses:'📚 Dersler', testimonials:'💬 Öğrenci Yorumları',
+    contact:'📬 İletişim', settings:'⚙️ Ayarlar'
+  };
+  document.getElementById('page-title').textContent = titles[id] || '';
+  // Close mobile sidebar
+  document.querySelector('.sidebar').classList.remove('open');
+}
+
+// ── Settings tabs
+function showStab(id, btn) {
+  ['stab-account','stab-seo','stab-appearance'].forEach(s => {
+    document.getElementById(s).style.display = 'none';
+  });
+  document.querySelectorAll('.stab').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).style.display = 'block';
+  btn.classList.add('active');
+}
+
+// ── Save all — writes to localStorage & updates index.html via JS overrides
+function saveAll() {
+  const data = {
+    hero_left:      v('hero-left'),
+    hero_right:     v('hero-right'),
+    hero_combined:  v('hero-combined'),
+    hero_badge:     v('hero-badge'),
+    hero_desc:      v('hero-desc'),
+    stat_followers: v('stat-followers'),
+    stat_posts:     v('stat-posts'),
+    about_name:     v('about-name'),
+    about_title:    v('about-title'),
+    about_quote:    v('about-quote'),
+    about_p1:       v('about-p1'),
+    about_p2:       v('about-p2'),
+    c1_title:v('c1-title'), c1_icon:v('c1-icon'), c1_desc:v('c1-desc'),
+    c2_title:v('c2-title'), c2_icon:v('c2-icon'), c2_desc:v('c2-desc'),
+    c3_title:v('c3-title'), c3_icon:v('c3-icon'), c3_desc:v('c3-desc'),
+    t1_name:v('t1-name'), t1_role:v('t1-role'), t1_text:v('t1-text'),
+    t2_name:v('t2-name'), t2_role:v('t2-role'), t2_text:v('t2-text'),
+    t3_name:v('t3-name'), t3_role:v('t3-role'), t3_text:v('t3-text'),
+    social_ig:    v('social-ig'),
+    social_yt:    v('social-yt'),
+    contact_email:v('contact-email'),
+    contact_title:v('contact-title'),
+    contact_desc: v('contact-desc'),
+    seo_title:    v('seo-title'),
+    seo_desc:     v('seo-desc'),
+    seo_keywords: v('seo-keywords'),
+    footer_quote: v('footer-quote'),
+    footer_cite:  v('footer-cite'),
+  };
+  localStorage.setItem('fo_content', JSON.stringify(data));
+  showToast('✅ Değişiklikler kaydedildi! Siteyi yenileyince görünür.');
+}
+
+// ── Load saved data into fields
+function loadSaved() {
+  const raw = localStorage.getItem('fo_content');
+  if (!raw) return;
+  const d = JSON.parse(raw);
+  Object.entries(d).forEach(([k,v]) => {
+    const el = document.getElementById(k.replace(/_/g,'-'));
+    if (el) el.value = v;
+  });
+}
+
+function v(id) {
+  const el = document.getElementById(id);
+  return el ? el.value : '';
+}
+
+// ── Password change
+function changePassword() {
+  const u = v('new-user'); const p = v('new-pass'); const p2 = v('new-pass2');
+  if (!u && !p) { showToast('⚠️ En az bir alan doldurun.', true); return; }
+  if (p && p !== p2) { showToast('❌ Şifreler eşleşmiyor!', true); return; }
+  if (p && p.length < 6) { showToast('❌ Şifre en az 6 karakter olmalı!', true); return; }
+  if (u) localStorage.setItem('fo_admin_user', u);
+  if (p) localStorage.setItem('fo_admin_pass', p);
+  document.getElementById('new-user').value = '';
+  document.getElementById('new-pass').value = '';
+  document.getElementById('new-pass2').value = '';
+  showToast('✅ Giriş bilgileri güncellendi!');
+}
+
+// ── Logout
+function doLogout() {
+  sessionStorage.removeItem('fo_admin_logged');
+  window.location.href = 'admin.html';
+}
+
+// ── Copy text
+function copyText(t) {
+  navigator.clipboard.writeText(t).then(() => showToast('📋 Kopyalandı!'));
+}
+
+// ── Open folder (Mac)
+function openFolder() {
+  showToast('📂 Finder\'da klasörü açmak için Mac\'te cmd+boşluk → Finder → fensefe-okulu');
+}
+
+// ── Toast
+function showToast(msg, isErr) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.background = isErr ? 'rgba(239,68,68,.15)' : 'rgba(16,185,129,.15)';
+  t.style.borderColor = isErr ? 'rgba(239,68,68,.4)' : 'rgba(16,185,129,.4)';
+  t.style.color = isErr ? '#ff8a8a' : '#10b981';
+  t.style.display = 'flex';
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => { t.style.display = 'none'; }, 3500);
+}
+
+// ── On load
+loadSaved();
+</script>
+</body>
+</html>
